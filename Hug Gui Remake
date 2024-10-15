@@ -1,0 +1,207 @@
+if game.Players.LocalPlayer.Character.Humanoid.RigType == Enum.HumanoidRigType.R6 then
+if game:GetService("CoreGui"):FindFirstChild("HUGUI") then
+game:GetService("CoreGui"):FindFirstChild("HUGUI"):Destroy()
+end
+
+local function createRainbowOutline(instance)
+    instance.BorderSizePixel = 1
+    spawn(function()
+        while true do
+            for hue = 0, 1, 0.01 do
+                instance.BorderColor3 = Color3.fromHSV(hue, 1, 1)
+                wait(0.05)
+            end
+        end
+    end)
+end
+
+local createRainbowText = function(instance)
+    spawn(function()
+        local hue = 0
+        while wait(0.01) do
+            hue = hue + 1 / 255
+            if hue > 1 then hue = 0 end
+            instance.TextColor3 = Color3.fromHSV(hue, 1, 1)
+        end
+    end)
+end
+
+HUGUI = Instance.new("ScreenGui")
+HFrame = Instance.new("Frame")
+HTopBar = Instance.new("Frame")
+CloseButton = Instance.new("TextButton")
+HugButton = Instance.new("TextButton")
+HugLabel = Instance.new("TextLabel")
+UserInputService = game:GetService("UserInputService")
+MinTab = Instance.new("TextButton")
+HugLabel_2 = Instance.new("TextLabel")
+
+HUGUI.Name = "HUGUI"
+HUGUI.Parent = game.CoreGui
+HUGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+game.CoreGui.HUGUI.Enabled = true
+
+HTopBar.Name = "HTopBar"
+HTopBar.Parent = HUGUI
+HTopBar.AnchorPoint = Vector2.new(0.5, 0.5)
+HTopBar.Position = UDim2.new(0.5, 0, 0.5, 0)
+HTopBar.Size = UDim2.new(0, 250, 0, 50)
+HTopBar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+HTopBar.ZIndex = 2
+createRainbowOutline(HTopBar)
+createRainbowText(HTopBar)
+
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = HTopBar
+CloseButton.AnchorPoint = Vector2.new(0.5, 0.5)
+CloseButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CloseButton.Position = UDim2.new(0.840, 0, 0.25, 0)
+CloseButton.Size = UDim2.new(0, 80, 0, 25)
+CloseButton.Font = Enum.Font.SourceSans
+CloseButton.TextSize = 35
+CloseButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+CloseButton.Text = "×"
+createRainbowOutline(CloseButton)
+createRainbowText(CloseButton)
+
+CloseButton.MouseButton1Click:Connect(function()
+HUGUI:Destroy()
+end)
+
+MinTab.Name = "MinTab"
+MinTab.Parent = HTopBar
+MinTab.AnchorPoint = Vector2.new(0.5, 0.5)
+MinTab.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MinTab.Position = UDim2.new(0.53, 0, 0.25, 0)
+MinTab.Size = UDim2.new(0, 80, 0, 25)
+MinTab.Font = Enum.Font.SourceSans
+MinTab.TextSize = 35
+MinTab.TextColor3 = Color3.fromRGB(0, 0, 0)
+MinTab.Text = "–"
+createRainbowOutline(MinTab)
+createRainbowText(MinTab)
+
+MinTab.MouseButton1Click:Connect(function()
+if MinTab.Text == "–" then
+MinTab.Text = "+"
+HFrame.Visible = false
+else
+if MinTab.Text == "+" then
+MinTab.Text = "–"
+HFrame.Visible = true
+end
+end
+end)
+
+HFrame.Name = "HFrame"
+HFrame.Parent = HTopBar
+HFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+HFrame.Position = UDim2.new(0.5, 0, 2, 0)
+HFrame.Size = UDim2.new(0, 250, 0, 150)
+HFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+createRainbowOutline(HFrame)
+createRainbowText(HFrame)
+
+HugButton.Name = "HugButton"
+HugButton.Parent = HFrame
+HugButton.AnchorPoint = Vector2.new(0.5, 0.5)
+HugButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+HugButton.Position = UDim2.new(0.5, 0, 0.7, 0)
+HugButton.Size = UDim2.new(0, 180, 0, 80)
+HugButton.Font = Enum.Font.PermanentMarker
+HugButton.TextSize = 50
+HugButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+HugButton.Text = "Hug :3"
+HugButton.TextSize = 70.000
+createRainbowOutline(HugButton)
+createRainbowText(HugButton)
+
+HugButton.MouseButton1Click:Connect(function()
+if HugButton.Text == "Hug :3" then
+HugButton.Text = " Hug :3 "
+Anim_1 = Instance.new("Animation")
+Anim_1.AnimationId = "rbxassetid://283545583"
+Play_1 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim_1)
+Anim_2 = Instance.new("Animation")
+Anim_2.AnimationId = "rbxassetid://225975820"
+Play_2 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim_2)
+Play_1:Play()
+Play_2:Play()
+else
+if HugButton.Text == " Hug :3 " then
+HugButton.Text = "Hug :3"
+Play_1:Stop()
+Play_2:Stop()
+end
+end
+end)
+
+HugLabel.Name = "HugLabel"
+HugLabel.Parent = HFrame
+HugLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+HugLabel.BackgroundTransparency = 1
+HugLabel.Position = UDim2.new(0.5, 0, 0.20, 0)
+HugLabel.Size = UDim2.new(0, 180, 0, 80)
+HugLabel.Font = Enum.Font.PermanentMarker
+HugLabel.TextSize = 28
+HugLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+HugLabel.Text = "If you are lonely, hug someone. :>"
+HugLabel.TextWrapped = true
+createRainbowOutline(HugLabel)
+createRainbowText(HugLabel)
+
+HugLabel_2.Name = "HugLabel_2"
+HugLabel_2.Parent = HFrame
+HugLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+HugLabel_2.BackgroundTransparency = 1
+HugLabel_2.Position = UDim2.new(-0.18, 0, -0.35, 0)
+HugLabel_2.Size = UDim2.new(0, 180, 0, 80)
+HugLabel_2.Font = Enum.Font.PermanentMarker
+HugLabel_2.TextSize = 28
+HugLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+HugLabel_2.Text = "#love"
+HugLabel_2.TextWrapped = true
+createRainbowOutline(HugLabel_2)
+createRainbowText(HugLabel_2)
+
+local gui = HTopBar
+ 
+local dragging
+local dragInput
+local dragStart
+local startPos
+ 
+local function update(input)
+    local delta = input.Position - dragStart
+    gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+ 
+gui.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = gui.Position
+ 
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+ 
+gui.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+ 
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+else
+warn("Switch to R6.")
+end
